@@ -1,0 +1,424 @@
+pumpingEquipment
+injection type=N/A
+Pipe Roughness=N/A
+Coiled Tubing Outer Diameter(inch)=0.0
+Coiled Tubing Inner Diameter(inch)=0.0
+Absolute Roughness(Inch)=0.0
+//
+injectedfluid
+Injection Rate(bbl/min)=0.0
+Leak Off Coefficient(ft/sec^1/2)=0.0
+Spurt Loss(gal/ft2)=0.0
+Skin=0.0
+PI(bbl/day-psi)=0.0
+Safety Margin(200-500 psi)=0.0
+Tectonic Stress(psi)=0.0
+//
+reservoirfluid
+fluidtype=N/A_OIL
+Viscosity(cp)=0.0
+Density(ppg)=0.0
+Formation Volume Factor(bbl/stb)=0.0
+Compressibility(1/psi)=0.0
+Effective Permiability(md)=0.0
+fluidtype=N/A_GAS
+Viscosity(cp)=0.0
+Density(ppg)=0.0
+Formation Volume Factor(bbl/stb)=0.0
+Compressibility(1/psi)=0.0
+Relative Permiability(md)=0.0
+GOR,Gas Oil Ratio(SCF/STB)=0.0
+Gas Specific Gravity=0.0
+fluidtype=N/A_WATER
+Viscosity(cp)=0.0
+Density(ppg)=0.0
+Formation Volume Factor(bbl/stb)=0.0
+Compressibility(1/psi)=0.0
+Relative Permiability(md)=0.0
+WOR,Water Oil Ratio(SCF/STB)=0.0
+Water Specific Gravity=0.0
+//
+rockProperties
+Stage=N/A
+Rock Density(lbm/ft3)=0.0
+Fracture Gradient(psi/ft)=0.0
+Young Modulus(psi)=0.0
+Shear Modulus(psi)=0.0
+Poisson Ratio=0.0
+Rock Embedment Strength(psi)=0.0
+Tensile Strength(psi)=0.0
+//
+proppantproperties
+BorProp 10/14=10/14
+Mesh=10/14 
+Poppant Diameter=0.0558298
+Specific Gravity=3.38
+Bulk Density=1.88
+Kf=1939064.885
+*
+ForeRCP 10/14=10/14
+Mesh=10/14  
+Poppant Diameter=0.0722835036
+Specific Gravity=2.39
+Bulk Density=1.62
+Kf=1939064.885 
+*
+ForePROP 10/14=10/14
+Mesh=10/14  
+Poppant Diameter=0.0677953122
+Specific Gravity=2.58
+Bulk Density=1.68
+Kf=1939064.885
+*
+XE112 12/18=12/18
+Mesh=12/18 
+Poppant Diameter=0.055905542
+Specific Gravity=3.2
+Bulk Density=1.78
+Kf=1939064.885
+*
+BorPROP 12/18=12/18
+Mesh=12/18 
+Poppant Diameter=0.0517323114
+Specific Gravity=3.04
+Bulk Density=1.87
+Kf=1939064.885
+*
+ForePROP 12/18=12/18
+Mesh=12/18 
+Poppant Diameter=0.0486614436
+Specific Gravity=2.93
+Bulk Density=1.76
+Kf=1939064.885
+*
+ForeRCP 12/18=12/18
+Mesh=12/18 
+Poppant Diameter=0.0537008164
+Specific Gravity=2.89
+Bulk Density=1.71
+Kf=1939064.885
+*
+Treg 16/20=16/20
+Mesh=16/20 
+Poppant Diameter=0.037401595
+Specific Gravity=2.64
+Bulk Density=1.54
+Kf=1939064.885
+*
+Ceramax 16/20=16/20
+Mesh=16/20 
+Poppant Diameter=0.041732306
+Specific Gravity=2.66
+Bulk Density=1.57
+Kf=1939064.885
+*
+ForePROP 16/20=16/20
+Mesh=16/20 
+Poppant Diameter=0.0377559259
+Specific Gravity=2.83
+Bulk Density=1.73
+Kf=1939064.885
+*
+ForePROP 16/30=16/30
+Mesh=16/30 
+Poppant Diameter=0.0362598621
+Specific Gravity=3.02
+Bulk Density=1.84
+Kf=1939064.885
+*
+BorePROP 16/20=16/20
+Mesh=16/20 
+Poppant Diameter=0.0377559259
+Specific Gravity=3.02
+Bulk Density=1.84
+Kf=1939064.885
+*
+BorePROP 16/30=16/30
+Mesh=16/30 
+Poppant Diameter=0.0377559259
+Specific Gravity=0.0296063152
+Bulk Density=1.84
+Kf=1939064.885
+*
+ForePROP 16/20=16/20
+Mesh=16/20 
+Poppant Diameter=0.0377559259
+Specific Gravity=2.83
+Bulk Density=1.73
+Kf=1939064.885
+*
+BorPROP 20/40=20/40
+Mesh=20/40 
+Poppant Diameter=0.0260630062
+Specific Gravity=3.02
+Bulk Density=1.8
+Kf=1939064.885
+*
+CarboP 8/14=8/14
+Mesh=8/14 
+Poppant Diameter=0.06692917
+Specific Gravity=2
+Bulk Density=1.88
+Kf=1939064.885
+*
+C-Lite 16/20=16/20
+Mesh=16/20 
+Poppant Diameter=0.0373622249
+Specific Gravity=2.72
+Bulk Density=1.63
+Kf=1939064.885
+*
+CarboP 16/20=16/20
+Mesh=16/20 
+Poppant Diameter=0.0377559259
+Specific Gravity=2.83
+Bulk Density=1.73
+Kf=1939064.885
+*
+ForePROP 16/20=16/20.................
+Mesh=16/20 
+Poppant Diameter=0.0391732495
+Specific Gravity=3.3
+Bulk Density=1.9
+Kf=1939064.885
+*
+SinLit 12/20=12/20.................
+Mesh=12/20 
+Poppant Diameter=0.0447638037
+Specific Gravity=3.25
+Bulk Density=1.81
+Kf=1939064.885
+*
+SinLit 16/30=16/30.................
+Mesh=16/30 
+Poppant Diameter=0.0377559259
+Specific Gravity=2.83
+Bulk Density=1.73
+Kf=1939064.885
+*
+Chi C-Lite 16/30=16/30.................
+Mesh=16/30 
+Poppant Diameter=0.0377559259
+Specific Gravity=2.83
+Bulk Density=1.73
+Kf=1939064.885
+*
+C-Lite 20/40=20/40.................
+Mesh=20/40 
+Poppant Diameter=0.0377559259
+Specific Gravity=2.83
+Bulk Density=1.73
+Kf=1939064.885
+*
+SinLite 20/40=20/40
+Mesh=20/40 
+Poppant Diameter=0.0348031684
+Specific Gravity=2.83
+Bulk Density=1.73
+Kf=1939064.885
+*
+TX Brown 8/16=8/16
+Mesh=8/16 
+Poppant Diameter=0.0660083779673395
+Specific Gravity=2.65
+Bulk Density=1.6
+Kf=1939064.885
+*
+TX Brown 12/20=12/20
+Mesh=12/20
+Poppant Diameter=0.049661041777578
+Specific Gravity=2.65
+Bulk Density=1.6
+Kf=1939064.885
+*
+TX Brown 16/30=16/30.................
+Mesh=16/30
+Poppant Diameter=0.0366072175237923
+Specific Gravity=2.65
+Bulk Density=1.6
+Kf=1939064.885
+*
+TX Brown 20/40=20/40.................
+Mesh=20/40
+Poppant Diameter=0.0253083140995531
+Specific Gravity=2.65
+Bulk Density=1.54
+Kf=1939064.885
+*
+TX Brown 30/70=30/70.................
+Mesh=30/70
+Poppant Diameter=0.0106041745057787
+Specific Gravity=2.65
+Bulk Density=1.53
+Kf=1939064.885
+*
+CarboHSP bauxite 12/18=12/18.................
+Mesh=12/18
+Poppant Diameter=0.0508267991
+Specific Gravity=3.61
+Bulk Density=2.1
+Kf=1939064.885
+*
+CarboHSP bauxite 16/30=16/30.................
+Mesh=12/20
+Poppant Diameter=0.0376378156
+Specific Gravity=3.61
+Bulk Density=2.1
+Kf=1939064.885
+*
+CarboHSP bauxite 20/40=20/40.................
+Mesh=20/40
+Poppant Diameter=0.0274409597
+Specific Gravity=3.61
+Bulk Density=2.1
+Kf=1939064.885
+*
+CarboHSP bauxite 30/60=30/60.................
+Mesh=30/60
+Poppant Diameter=0.016929143
+Specific Gravity=3.61
+Bulk Density=2.1
+Kf=1939064.885
+*
+WL Hsp 16/30=16/30
+Mesh=16/30
+Poppant Diameter=0.0376664
+Specific Gravity=3.37
+Bulk Density=1.87
+Kf=882609.1504
+*
+WL Hsp 20/40=20/40
+Mesh=20/40
+Poppant Diameter=0.0282892
+Specific Gravity=3.23
+Bulk Density=1.82
+kf=497853.4598
+*
+WL Hsp 30/50=30/50
+Mesh=30/50
+Poppant Diameter=0.0194636
+Specific Gravity=3.27
+Bulk Density=1.75
+kf=235671.214
+*
+WL Isp 12/18 =12/18 
+Mesh=12/18
+Poppant Diameter=0.0545296
+Specific Gravity=3.32
+Bulk Density=1.74
+Kf=1849800.197
+*
+WL Isp 16/30=16/30
+Mesh=16/30
+Poppant Diameter=0.0375088
+Specific Gravity=3.15
+Bulk Density=1.79
+Kf=875238.7513
+*
+WL Isp 20/40=20/40
+Mesh=20/40
+Poppant Diameter=0.0257676
+Specific Gravity=3.18
+Bulk Density=1.82
+Kf=413055.2417
+*
+WL Isp 30/50=30/50
+Mesh=30/50
+Poppant Diameter=0.0199758
+Specific Gravity=3.1
+Bulk Density=1.71
+Kf=248238.1693
+*
+WL Isp 40/70=40/70
+Mesh=40/70
+Poppant Diameter=0.015169
+Specific Gravity=3.26
+Bulk Density=1.69
+Kf=143144.3135
+*
+WL Lite 12/18=12/18
+Mesh=12/18
+Poppant Diameter=0.0553964
+Specific Gravity=2.77
+Bulk Density=1.52
+Kf=1909076.284
+*
+WL Lite 16/30=16/30
+Mesh=16/30
+Poppant Diameter=0.0367208
+Specific Gravity=2.76
+Bulk Density=1.55
+Kf=838850.3031
+*
+WL Lite 20/40=20/40
+Mesh=20/40
+Poppant Diameter=0.0273042
+Specific Gravity=2.74
+Bulk Density=1.5
+Kf=463787.5758
+*
+WL Lite 30/50=30/50
+Mesh=30/50
+Poppant Diameter=0.0173754
+Specific Gravity=2.73
+Bulk Density=1.52
+Kf=187814.8034
+*
+WL Lite 40/70=40/70
+Mesh=40/70
+Poppant Diameter=0.0131596
+Specific Gravity=2.75
+Bulk Density=1.47
+Kf=107732.2114
+*
+WL Rcs 16/30=16/30
+Mesh=16/30
+Poppant Diameter=0.0369178
+Specific Gravity=2.53
+Bulk Density=1.59
+Kf=847874.986
+*
+WL Rcs 20/40=20/40
+Mesh=20/40
+Poppant Diameter=0.0255706
+Specific Gravity=2.5
+Bulk Density=1.58
+Kf=406763.5554
+*
+WL Rcs 30/50=30/50
+Mesh=30/50
+Poppant Diameter=0.0178876
+Specific Gravity=2.5
+Bulk Density=1.58
+Kf=199050.9922
+*
+WL Rcs 40/70=40/70
+Mesh=40/70
+Poppant Diameter=0.0127262
+Specific Gravity=2.45
+Bulk Density=1.55
+Kf=100752.9302
+//
+WellForcast
+Well Type=N/A
+kf=0.0
+wf=0.0
+xf=0.0
+Frac Height=0.0
+Permiability=0.0
+Reservoir Pressure=0.0
+Flowing Bottomhole Pressure=0.0
+Effective Radius=0.0
+Wellbore Radius=0.0
+Skin=0.0
+Temperature=0.0
+Formation Factor=0.0
+viscosity=0.0
+//
+wellForcastDeclineCurveAnalysis
+Initial Month Qo=0.0
+End Month Q=0.0
+Initial Month T1m=0.0
+End Month T0m=0.0
+d=0.0
+//

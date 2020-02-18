@@ -1,0 +1,242 @@
+<script th:inline="javascript">
+	$("#fType").change(function(event) {
+		event.preventDefault();
+		var var1 = $("#fType").val();
+		var var2 = $("#pid").val();
+		var radioValue = $("input[name='aq']:checked").val();
+		$.ajax({
+			url : '/reservoirFluid1/showRFSecondController',
+			data : {
+				fluidT : var1,
+				pid : var2,
+				radioValue : radioValue
+			},
+			success : function(res) {
+				$("#loadtable").html(res);
+				$("#exampleModal").show();
+			}
+		});
+	});
+	
+	 $("#formwithallData").focus(function(){
+		    /* $("span").css("display", "inline").fadeOut(2000); */
+		 
+		  });
+
+
+	$('input[type=radio][name=aq]').click(function() {
+		var value = $(this).val();
+		var var2 = $("#pid").val();
+		var var1 = $("#fType").val();
+		$.ajax({
+			url : '/reservoirFluid1/updateRadioWellTypeController',
+			data : {
+				welltypeaq : value,
+				pid : var2,
+				fluidT : var1
+			},
+			success : function(res) {
+				$("#loadtable").html(res);
+				$("#exampleModal").show();
+			}
+		});
+
+	});
+
+	$("#0").click(
+			function() {
+				var value = $(this).val();
+				var var2 = $("#pid").val();
+				var var1 = $("#fType").val();
+				$.ajax({
+					url : '/reservoirFluid1/updateRadioWellTypeController',
+					data : {
+						welltypeaq : value,
+						pid : var2,
+						fluidT : var1
+					},
+					success : function(res) {
+						$("#loadtable").html(res);
+						$("#exampleModal").show();
+						$("#radiodiv")
+								.find(':radio[name=aq][value="Oil Well"]')
+								.prop('checked', true);
+					}
+				});
+
+			});
+	$("#1").click(
+			function() {
+				var value = $(this).val();
+				var var2 = $("#pid").val();
+				var var1 = $("#fType").val();
+				$.ajax({
+					url : '/reservoirFluid1/updateRadioWellTypeController',
+					data : {
+						welltypeaq : value,
+						pid : var2,
+						fluidT : var1
+					},
+					success : function(res) {
+						$("#loadtable").html(res);
+						$("#exampleModal").show();
+						$("#radiodiv")
+								.find(':radio[name=aq][value="Gas Well"]')
+								.prop('checked', true);
+					}
+				});
+
+			});
+	$("#updateValue").click(function(event) {
+		event.preventDefault();
+		var i = 0;
+		$('input[name="value"]').each(function() {
+			if ($(this).val() == ''  ) {
+				i = i + 1;
+				$(this).attr("placeholder", "Required");
+				$(this).css({'border':'1px solid #d9534f'});
+			}else{
+				$(this).css({'border':'none'});
+			}
+		});
+		if (i == 0) {
+		    /* setTimeout(() => {
+		    	$("#updateValue").css('background-color', 'green');  }, 50);
+		    setTimeout(() => {
+		    	$("#updateValue").css('background-color', '#07f5f5');}, 500);
+			 */
+			 alert("Values Are Going To Be Saved");
+			 $.ajax({
+				url : '/updateTDValueController',
+				data : $("#formwithallData").serialize(),
+				success : function(res) {
+					$("#loadtable").html(res);
+					$("#exampleModal").show();
+				}
+			});
+		}
+	});
+
+
+	$("#03").click(function(){
+		var id=$("#pid").val();
+		
+		url="injectionPlan/selectFromOption";
+		$.ajax({
+			url:url,
+			data:{pid:id},
+			success:function(res){
+				$("#loadtable").html(res);
+	          	$("#exampleModal").show();
+			}
+		});
+	});
+	
+	
+</script>
+
+<style>
+<!--
+.tableRowClass
+{
+
+}
+
+	.table tr:nth-child(even){
+		background: #dae5f4;
+	}
+	
+.table
+{
+ 
+width: 500px;
+height: 200px;
+border-color:black;
+border-width:2px;
+ box-shadow: 10px 10px grey;
+ border: 3px solid black;
+}
+
+.tableTHClass, .tableTHClass
+{
+border-color:black;
+border-width:2px;
+
+}
+.heading
+{
+color: black; 
+background-image: radial-gradient(white, gray); 
+width: 300px;
+height: 25px;
+ text-align: center;
+  border: 3px solid black;
+
+
+}
+-->
+</style>
+
+<div class="btn-group-horizontal">
+						<button type="button" id="03" class="fa fa-arrow-left" aria-hidden="true" style="width:auto; border:none;">
+						</button>
+					
+					</div>
+	
+	 
+						
+						
+<section class="content">
+	<div class="tab-pane active danger" id="fill">
+		<li class="list-group-item ">
+			<div style="">
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+					<form class="form-horizontal" role="form" id="formwithallData">
+						<input id="pid" name="pid" type="hidden" th:value=${pid}>
+						<div class="heading"  style="width: 500px;"> <strong>Treatment Design</strong></div>
+						<table id="example2" class="table table-hover table-bordered ">
+							</thead>
+							<tbody th:if="${list.empty}" id="body">
+							<tbody>
+							<tr   >
+							<td style="   background-image: radial-gradient(white, grey);" align="center"> <strong  >PARAM </td>
+							<td style="background-image: radial-gradient(white, grey);" align="center"><strong>VALUE</strong></td>
+							</tr>
+								<tr class="tableRowClass"  th:each="list,iterStat : ${list}">
+								<!-- 	<th  style="width: 180px; " class="tableTHClass" th:text="${list.param} + ${rfplist[iterStat.index]}"></th>
+						 -->			
+						
+						
+								<th  style="width: 180px; " class="tableTHClass" th:text="${list.param}"></th>
+				
+						 <td    style="width: 100px; border: 2px; border-bottom-color: blue" class="tableTDClass"  ><input type="text" name="value"
+										th:value="${list.value}" style="  border: 2px; border-bottom-color: blue"
+										class="time form-control inputvalueclass"> <input
+										type="hidden" name="ftype1" th:value="${list.fluidtype}"
+										class="time form-control text-center"></td>
+								</tr>
+							</tbody>
+						</table>
+								<div style="margin-left: 100px;">
+				
+						<input type="submit" class="btn btn-primary" value="Update" style="width:auto; margin-left: 100px;"
+							id="updateValue" />
+		</div>
+					</form>
+					
+			
+					
+				</div>
+			</div></div>
+			</li>
+	</div>
+</section>
+
+
+
+
+
+
+

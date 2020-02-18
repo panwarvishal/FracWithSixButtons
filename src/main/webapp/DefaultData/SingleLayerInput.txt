@@ -1,0 +1,17 @@
+Bottomhole Pressure=0.0
+Reservoir Temperature=0.0
+Biot's Constant=0.0
+Tensile Stress=0.0
+Tectonic Stress=0.0
+Stress Analysis=no
+permabilityAll=0.0
+poroAll=0.0
+paythickAll=0.0
+rPressureAll=0.0
+youngModulusAll=0.0
+pRatioAll=0.0
+leakAll=0.0
+spurtAll=0.0
+Fracture Gross Height (md)=0.0
+salary Schedule Graph=yes
+InjectionPlan=TreatmentDesign

@@ -1,0 +1,769 @@
+ <!--   /**
+ * @author Vishal Kumar
+ *
+ */ -->
+    <script type="text/javascript">
+
+    $( "#button" ).click(function() {
+    	
+        $( "#fill" ).slideToggle( "fast" );
+        $( "#form" ).slideToggle( "fast" );
+        $( "#saveDiv" ).hide;
+        
+         
+        var val = $(this).val();
+        if(val=="Click For Multiple Zones"){
+        document.getElementById('button').value = "Import Well Log";
+        }
+        else{
+        document.getElementById('button').value = "Click For Multiple Zones";
+        }
+        });
+   ////////////////////////////////////////////////// 
+   
+   
+   
+   $("#rl_impstages").keyup(function(e) {
+    if (e.which == 13) {
+    	$("#as9").show();
+    	url="reservoirLithology/rows";
+    	var x=$("#rl_imppid").val();
+    	$.ajax({
+    		url:url,                     
+    		data:{no:$(this).val(),pid:$("#rl_imppid").val(),},    
+    	success:function(res){
+    		$("#loadtable").html(res);
+			$("#exampleModal").show();
+			$("#rl_impsavebt").show();
+			$("#fill").show();
+          	$("#form").hide();
+    	}
+    	});
+      }
+});
+   
+   
+   
+
+    
+ ///////////  /////////////////////////////////////
+     $("#fiveValue").click(function(){
+    	
+    	 
+    	    setTimeout(() => {
+    	    	$("#rightSignID").show();  }, 50);
+    	    setTimeout(() => {
+    	    	$("#rightSignID").fadeOut();}, 500);
+     	url="reservoirLithology/controller5value";
+     	var empty2=0;
+    	var bottomholePressure1= $(bottomholePressure).val();
+		var reservoirTemperature1= $(reservoirTemperature).val();
+		var tensileStress1= $(tensileStress).val();
+		var tectonicStress1= $(tectonicStress).val();
+		var BiotConstant1= $(BiotConstant).val();
+     	if ($(this).val() == ''  ) {
+     		empty2 = empty2 + 1;
+			$(this).attr("placeholder", "Required");
+			$(this).css({'border':'1px solid #d9534f'});				
+		}
+	
+     if(empty2==0){	
+     $.ajax({
+     		url:url,                     
+     		data:{ pid:$("#rl_imppid").val(),reservoirTemperature1:reservoirTemperature1,BiotConstant1:BiotConstant1,tensileStress1:tensileStress1,tectonicStress1:tectonicStress1,bottomholePressure1:bottomholePressure1,},    
+     	success:function(res){
+     		$("#loadtable").html(res);
+ 			$("#exampleModal").show();		
+     	}
+     	});
+     	}
+     });
+ /////////////////////////////
+    $("#rl_impsavebt").click(function(){
+    	url="reservoirLithology/savelithology";
+    	$.ajax({
+    		url:url,
+    		data:$("#rl_mainform").serialize(),
+    		success:function(res){
+    			$("#loadtable").html(res);
+    			$("#exampleModal").show();
+    		}
+    	});
+    });
+    
+    
+    
+    $("#cid").click(function(){
+		// $('.3Buttons').css(visibility: visible);
+		// $("#678").css(display : normal);
+		$("#as1").show();
+		$("#as2").show();
+			url="reservoirLithology/stressAController";
+	    	$.ajax({
+	    		url:url,
+	    		data:{pid:$("#rl_imppid").val(),}, 
+	    		success:function(res){
+	    			$("#loadtable").html(res);
+	    			$("#exampleModal").show();
+	    		}
+	    	});
+    });
+    
+    ////////////////////
+    var x=   $("#stressanalysisID").val();
+    if(x=="yes" )
+    	{
+    	 $( "#cid" ).prop( "checked", true );
+		 $('.stressA').show();	
+		 $("#as").show();	
+		 $("#as1").show();	
+		 $("#as2").show();	
+		 
+
+    	}
+    else{
+    	 $( "#cid" ).prop( "checked", false );
+		 $('.stressA').hide();		 
+
+	}
+   /////////////
+	$("#04").click(function(){
+		var id=$("#rl_imppid").val();
+		url="reservoirLithology/alwaysFirstPageController";
+		$.ajax({
+			url:url,
+			data:{pid:id},
+			success:function(res){
+				$("#loadtable").html(res);
+	          	$("#exampleModal").show();
+			}
+		});
+	});
+	
+   
+   /////////////////////
+   	$("#05").click(function(){
+		var id=$("#rl_imppid").val();
+		url="reservoirLithology/goToNextPage";
+		$.ajax({
+			url:url,
+			data:{pid:id},
+			success:function(res){
+				$("#loadtable").html(res);
+	          	$("#exampleModal").show();
+			}
+		});
+	});
+   
+   
+   
+    $("#sa_impdatabt").click(function(event){
+    	event.preventDefault();
+    	var formData=new FormData($("#fileUploadForm")[0]),
+    	url="reservoirLithology/uploadfile";
+    	if($("#file2").val()){
+    		$.ajax({
+    			 url: url,
+    			 type:'POST',
+    			  enctype: 'multipart/form-data',
+    			  data:formData,
+    			  processData: false, // tell jQuery not to process the data
+    			  contentType: false, // tell jQuery not to set contentType
+    			  cache: false,
+    			success:function(res){
+    				$("#loadtable").html(res);
+    			    $("#exampleModal").show();
+    			}
+    		});
+    	}else{
+    		alert("Select File");
+    		return false;
+    	}
+    });
+    
+    
+    //saving values,,,, 
+    $("#fgfg").click(function(event){
+    	 event.preventDefault();
+    	  
+  	    
+    	url="reservoirLithology/savelithology";
+    	if ($(".nextLine").val()!='') {
+    		
+    		setTimeout(() => {
+      	    	$("#rightSignID").show();  }, 50);
+      	    setTimeout(() => {
+      	    	$("#rightSignID").fadeOut();}, 500);
+    		
+    		
+    	$.ajax({
+    		url:url,
+    		data:$("#mainForm2").serialize(),
+    		success:function(res){
+    			$("#loadtable").html(res);
+    			$("#exampleModal").show();
+    		}
+    	});
+    	}	else
+		{
+    		$(".nextLine").attr("placeholder", "Required");
+				   $(".nextLine").css({'background-image':'radial-gradient(white, #fcfbb8)'});
+					$(".nextLine").css({'outline':'1px solid #d9534f'});}
+    });
+    
+    // add new row....
+
+    
+/*     	 $("#sa_impaddfieldbt").click(function(event){
+    		 event.preventDefault();
+    	    	url="reservoirLithology/savelithology";
+    	    	if ($(".nextLine").val()!='') {
+    	    	$.ajax({
+    	    		url:url,
+    	    		data:$("#mainForm2").serialize(),
+    	    		success:function(res){
+    	    			$("#loadtable").html(res);
+    	    			$("#exampleModal").show();
+    	    		}
+    	    	});
+    	    	}
+    	    	else
+    	    		{
+    	    		$(".nextLine").attr("placeholder", "Required");
+						   $(".nextLine").css({'background-image':'radial-gradient(white, #fcfbb8)'});
+							$(".nextLine").css({'outline':'1px solid #d9534f'});}
+    	    }); */
+   
+    	    
+    	    $("#sa_impaddfieldbt").click(function(event){
+       		 event.preventDefault();
+       	    	url="reservoirLithology/savelithology";
+       	    	if ($(".nextLine").val()!='') {
+
+       	    		if ($("#poRa").val()<1)
+       	    		{   	$.ajax({
+           	    		url:url,
+           	    		data:$("#mainForm2").serialize(),
+           	    		success:function(res){
+           	    			$("#loadtable").html(res);
+           	    			$("#exampleModal").show();
+           	    		}
+           	    	});	}
+       	    		else
+       	    			{alert("Enter value of poisson ratio less than 1");
+						   $("#poRa").css({'background-image':'radial-gradient(white, red)'});
+       	    			} }
+       	    	else
+       	    		{
+       	    		$(".nextLine").attr("placeholder", "Required");
+   						 //  $(".nextLine").css({'background-image':'radial-gradient(white, #fcfbb8)'});
+   							$(".nextLine").css({'outline':'1px solid #d9534f'});}
+       	    });
+    	    
+    	    
+    	    
+    	    
+    	    
+   
+    $(".deleteId").click(function(){
+    	 var id =$(this).closest('td').find('input[name=sa_imphiddenid]').val();
+    	//var id =$("#deleteInput").val();
+    	var pid=$("#rl_imppid").val();
+    	url="reservoirLithology/deleteController";
+    	$.ajax({
+    		url:url,
+    		data:{pid:pid,id:id},
+    		success:function(res){
+    			$("#loadtable").html(res);
+    			$("#exampleModal").show();
+    		}
+    	});
+    });
+    
+    
+    
+
+    
+    	
+    	
+    	
+    </script>
+  
+     
+     
+     <style>
+     
+#newfont
+{
+  font-family: "Verdana", Times, serif;
+
+}
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+table, th, td {
+  border: 10px solid white;
+}
+
+
+  #rightSignID 
+{
+
+font-size: 22px;
+color:green;
+}
+ 
+  #rightSignID, #updateDivId
+{
+    display:inline;
+    padding: 50;
+}
+
+.btn-btn:hover  {
+   color: black;
+   border-color: black;
+   background-image: radial-gradient(white, gray);
+}
+
+.Arrow{
+color: green;
+margin-top: 10px;
+font-size:30px;
+}
+.Arrow:hover{
+color: black;
+}
+
+.primary:hover{
+background-image: radial-gradient(white, gray);
+}
+
+.info:hover{
+background-image: radial-gradient(white, gray);
+}
+
+</style>
+
+
+<!-- 
+put necessay pid or any other id and parameter on the very first lines
+ -->
+	          
+	<div class="btn-group-horizontal">
+						<button type="button" id="05" class="fa fa-hand-o-right pull-right Arrow" aria-hidden="true" style="width:auto; border:none;">
+						</button>
+					
+					</div>
+<div><div class="btn-group-horizontal">
+						<button type="button" id="04" class="fa fa-hand-o-left Arrow" aria-hidden="true" style="width:auto; border:none;">
+						</button>
+					
+					</div>
+	<input id="rl_imppid" type="hidden" name="pid" th:value="${pid}"/>
+	<input id="stressanalysisID" type="hidden" name="said" th:value="${stressAnalysis}"/>
+  				
+					
+            
+	
+        <div class="row" id="form">
+            <div class="col-lg-8 col-xs-6">
+                <h3>Note:</h3>
+                <ul>
+                    User can input reservoir lithology (Perm/Poro over depth (MD), TVD, formation pressure ) in anyone of three ways :
+                    <li>  Import well log ( Porosity log in .las/txt) file</li>
+                    <li>  Import excel file (Perm/Poro over depth, excel format provided)</li>
+                    <li>  Enter manually (Perm/Poro, TVD and formation pressure)</li>
+    </br>      	
+                
+                      <div class="col-lg-4 col-xs-6">
+                <form th:action="@{/}" enctype="multipart/form-data" id="fileUploadForm" method="POST" name="demoform">
+                <input type="hidden" id="" name="pid" th:value="${pid}">
+                    <div class="form-group ">
+                        Select Excel(xlsx) to import
+                        <input name="sa_impfile" id="file2" type="file">
+                    </div>
+                    <div class="form-group ">
+                        <input type="submit"  value="Import" class="btn btn-info"  id="sa_impdatabt" style="width:25%"/>
+                    </div>
+                </form>
+            </div> 
+                
+            </div> 
+                </ul>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        <form id="id5ValueForm" >		 
+<!--  <table   >
+  <tr style=" padding-left: 35px;">
+   
+    <th><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reservoir Temperature &nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input   class="form-control" min="0" type="text" id="reservoirTemperature"  name="name5values" th:value="${temp}" disabled/>
+ </th>
+    <th><label style=" padding-left: 35px;" >Bottomhole Pressure&nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input  class="form-control" min="0" type="hidden" id="bottomholePressure" name="name5values" th:value="${pressure}"/>
+ </th>
+
+   
+  </tr>
+    <tr style="display:none" class="stressA"  >
+    <th style=" padding-left: 35px;"><label>Biot's Constant&nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input  class="form-control" min="0" type="text" id="BiotConstant" name="name5values" th:value="${biot}"/ disabled>
+ </th>
+
+    <th><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tensile Stress
+ &nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input  class="form-control" min="0" type="text" id="tensileStress" name="name5values" th:value="${tensile1}"/ disabled>
+ </th>
+   
+     <th><label>&nbsp;&nbsp;Tectonic Stress
+&nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input  class="form-control" min="0" type="text" id="tectonicStress" name="name5values" th:value="${tectonic1}"/ disabled>
+ </th>
+  </tr> 
+   <tr>
+
+</table>	 -->
+</form> 
+                      
+       
+    <!--    <input type="button"   value="Click For Multiple Zones" id="button" style="width:auto;    background-image: radial-gradient(white, gray);"><i class='far fa-hand-paper'></i> 
+        <div class="tab-pane active" id="fill" style="display: none;">
+            <li class="list-group-item">
+                <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-7"> -->
+   <div>
+        <table style="margin-left: 26px;">
+    <tr >
+      <td> <div class="pull left row" style="background-image: radial-gradient(white, gray); width: 220px; margin-left: 14px;"><label id="newfont" >&nbsp;&nbsp;No of Fracturing Zones &nbsp;&nbsp;&nbsp;</label></div>
+  </td>
+   <td>    <div> <input min="0" type="number" id="rl_impstages" th:value="${number}" style="width: 58px;"/>   </div> 
+
+    </td>
+       </tr>
+       </table>
+       </div>
+ 
+
+ 
+                </div> 
+                <form id="rl_mainform">
+           <input type="hidden" id="" name="pid" th:value="${pid}">
+                <div class="row" th:if=${listOfRows!=null}  >
+                    <div class="col-md-12 menu"  >
+                        <table id="example2"  class="table table-hover table-bordered" >
+                        <div >
+                     
+                             <thead  th:if="${session.unitType=='Metric'}">
+                       	<tr style=" background-image: radial-gradient(white, gray); text-align: center; " height="8" >
+								   <th  >Zone11111 &nbsp;&nbsp; </th>
+									<th  > From MD<br>(ft)</th>
+							    	<th    > To MD<br>(ft)</th>
+							    	<th    >TVD<br>(ft)</th>
+							  <th    >Pay thickness</th>
+								    <th     >Reservoir<br>Pressure</th>
+							     	<th >Permeability<br>(m2)</th>
+								    <th >Porosity</th>
+									<th>Young's<br>Modulus </th>
+									<th    id="as" >Poisson Ratio</th>
+									<th    >Leakoff Coef<br>(m/(min)1/2)</th>
+									<th  id="as21"    >Spurt loss Coefficient</th>
+									
+									<th   id="as1" class="stressA" style="	  display:none; ">Pore Pressure</th>
+									<th  id="as2" class="stressA" style="	  display:none;">Density</th>
+							</tr>
+						</thead>
+			             <!-- This is for the user th:if="${buttonValue=='userDiv'}" -->		
+<!-- 					<thead  if=[[${session.unitType}]]=="Field">
+ -->					<thead  th:if="${session.unitType=='Field'}">
+					<tr style=" background-image: radial-gradient(white, gray); text-align: center; "   >
+								   <th  >Zone&nbsp;&nbsp; </th>
+									<th  > From MD<br>(ft)</th>
+							    	<th    > To MD<br>(ft)</th>
+							    	<th    >TVD<br>(ft)</th>
+							    <th    >Pay thickness</th>
+								    <th     >Reservoir<br>Pressure</th>
+							     	<th >Permeability<br>(m2)</th>
+								    <th >Porosity</th>
+									<th>Young's<br>Modulus </th>
+									<th    id="as" >Poisson Ratio</th>
+									<th    >Leakoff Coef<br>(m/(min)1/2)</th>
+									<th  id="as21"    >Spurt loss Coefficient</th>
+									
+									<th   id="as1" class="stressA" style="	  display:none; ">Pore Pressure</th>
+									<th  id="as2" class="stressA" style="	  display:none;">Density</th>
+									
+							</tr>
+						</thead>
+						
+						
+						<tbody>
+								<tr th:each="list:${list}">
+								<th style="text-align:center;" th:text="${list.zone}">-Zone</th>
+								<td th:text="${list.fromMd}"></td>
+								<td th:text="${list.toMd}"></td>
+								<td th:text="${list.tvd}"></td>
+								<td th:text="${list.payThickness}"></td>
+								<td th:text="${list.reservoirPressure}"></td>
+								<td th:text="${list.perm}"></td>
+								<td th:text="${list.poro}"></td>
+								<td th:text="${list.youngs}"></td>
+								<td th:text="${list.poisonRatio}"></td>
+								<td th:text="${list.leakoff}"></td>
+								<td th:text="${list.spurtLossCoefficient}"></td>
+								<td class="stressA" th:text="${list.porePressure}"></td>
+								<td class="stressA"  th:text="${list.density}"></td>
+								<!-- <td th:value="delete"></td>
+								 
+								<td><input type="text" th:value="${list.id}" ></td>
+						 -->	</tr>
+						 <tr th:each="listOfRows:${listOfRows}">
+								<th>
+								<input class="form-control" th:value="${listOfRows}" name="rl_input" style="border:none;text-align: center;" readonly>
+								</th>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="tvd34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="md34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="laye34r" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="laye34r" name="rl_input" style="border:none;"></td>
+							    <td><input type="number" min="0" max=""
+									class="form-control" id="r334ock" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="perm34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="poro34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="leak34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="youngs3434" name="rl_input" style="border:none;"></td>
+								<td   ><input type="number" min="0" max=""
+									class="form-control" id="poro34" name="rl_input" style="border:none;"></td>
+								<td   ><input type="number" min="0" max=""
+									class="form-control" id="leak34" name="rl_input" style="border:none;"></td>
+								<td style="display:none" class="stressA" ><input type="number" min="0" max=""
+									class="form-control" id="youngs3434" name="rl_input" style="border:none;"></td>
+								<td style="display:none" class="stressA" ><input type="number" min="0" max=""
+									class="form-control" id="spurt3434" name="rl_input" style="border:none;"></td>
+							</tr> 
+							</tbody>
+                        </table>
+                    </div>
+                </div>
+                </form>
+                <br>
+               </li>  
+               <br>
+                                   	
+                  <center>
+                        <input type="button" value="Save" class="btn btn-info" id="rl_impsavebt" style="display:none;">
+                        </center>
+			</div>
+		<!-- 	fill div ends here -->
+			<form id="mainForm2">
+			 <input type="hidden" id="" name="pid" th:value="${pid}">
+			  <div class="row" id="saveDiv" th:if=${list!=null} style="max-height: 300px; overflow: auto;">
+                    
+                    <div class="col-md-12 menu" style="overflow-x: auto; overflow-y: hidden;" id="hiddenTableDiv" >
+		
+               
+			 <table id="example21" class="table table-hover table-bordered fulldata"  >
+                        <div >
+                            <thead  th:if="${session.unitType=='Metric'}">
+                       	<tr style=" background-image: radial-gradient(white, gray); text-align: center; " height="8" >
+								   <th  >Zone &nbsp;&nbsp; </th>
+									<th  > From MD<br>(ft)</th>
+							    	<th    > To MD<br>(ft)</th>
+							    	<th    >TVD<br>(ft)</th>
+							  <th    >Pay thickness<br>(ft)</th>
+								    <th     >Reservoir<br>Pressure</th>
+							     	<th >Permeability<br>(m2)</th>
+								    <th >Porosity</th>
+									<th>Young's<br>Modulus </th>
+									<th    id="as" >Poisson Ratio</th>
+									<th    >Leakoff Coef<br>(m/(min)1/2)</th>
+									<!-- <th  id="as21"    >Spurt loss Coefficient</th> -->
+									
+									<th   id="as1" class="stressA" style="	  display:none; ">Pore Pressure</th>
+									<th  id="as2" class="stressA" style="	  display:none;">Density</th>
+									
+							</tr>
+						</thead>
+						
+			             <!-- This is for the user th:if="${buttonValue=='userDiv'}" -->		
+						
+<!-- 					<thead  if=[[${session.unitType}]]=="Field">
+ -->					<thead  th:if="${session.unitType=='Field'}">
+					
+					<tr style=" background-image: radial-gradient(white, gray); text-align: center; " height="8" >
+								   <th  >Zone &nbsp;&nbsp; </th>
+									<th  > From MD<br>(ft)</th>
+							    	<th    > To MD<br>(ft)</th>
+							    	<th    >TVD<br>(ft)</th>
+							    <th    >Pay thickness </th>
+								    <th     >Reservoir<br>Pressure</th>
+							     	<th >Permeability<br>(m2)</th>
+								    <th >Porosity</th>
+									<th>Young's<br>Modulus </th>
+									<th    id="as" >Poisson Ratio</th>
+									<th    >Leakoff Coef<br>(m/(min)1/2)</th>
+									<!-- <th  id="as21"    >Spurt loss Coefficient</th> -->
+									
+									<th   id="as1" class="stressA" style="	  display:none; ">Pore Pressure</th>
+									<th  id="as2" class="stressA" style="	  display:none;">Density</th>
+									
+									
+							</tr>
+						</thead>
+						<tbody>
+							<!-- <tr th:each="list:${list}">
+								<th>
+								<input class="form-control" th:value="${list}" name="rl_input" style="border:none;text-align: center;" readonly>
+								</th>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="tvd34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="md34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="laye34r" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="r334ock" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="perm34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="poro34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="leak34" name="rl_input" style="border:none;"></td>
+								<td><input type="number" min="0" max=""
+									class="form-control" id="youngs3434" name="rl_input" style="border:none;"></td>
+								
+								<td   ><input type="number" min="0" max=""
+									class="form-control" id="poro34" name="rl_input" style="border:none;"></td>
+								<td   ><input type="number" min="0" max=""
+									class="form-control" id="leak34" name="rl_input" style="border:none;"></td>
+								
+								<td style="display:none" class="stressA" ><input type="number" min="0" max=""
+									class="form-control" id="youngs3434" name="rl_input" style="border:none;"></td>
+								<td style="display:none" class="stressA" ><input type="number" min="0" max=""
+									class="form-control" id="spurt3434" name="rl_input" style="border:none;"></td>
+										
+							</tr> -->
+							
+							<tr th:each="list:${list}">
+								<th><input th:value="${list.zone}" type="number"   name="rl_input" class="form-control"></th>
+								<td><input type="number" th:value="${list.fromMd}" name="rl_input" class="form-control"></td>
+								<td><input type="number"  th:value="${list.toMd}" name="rl_input" class="form-control"></td>
+								<td ><input type="number" th:value="${list.tvd}" name="rl_input" class="form-control"></td>
+								<td><input type="number"  th:value="${list.payThickness}" name="rl_input" class="form-control"></td>
+								<td ><input type="number" th:value="${list.reservoirPressure}" name="rl_input" class="form-control"></td>
+								<td ><input type="number" th:value="${list.perm}" name="rl_input" class="form-control"></td>
+								<td ><input type="number" th:value="${list.poro}"  name="rl_input" class="form-control"></td>
+								<td ><input type="number" th:value="${list.youngs}" name="rl_input" class="form-control"></td>
+								<td ><input type="number" th:value="${list.poisonRatio}" name="rl_input" class="form-control"></td>
+								<td ><input type="number" th:value="${list.leakoff}" name="rl_input" class="form-control"></td>
+								<td style="display: none;" ><input type="hidden" th:value="${list.spurtLossCoefficient}" name="rl_input" class="form-control"></td>
+								<td class="stressA"><input type="number"  class="form-control" name="rl_input" th:value="${list.porePressure}"  ></td>
+								<td class="stressA"><input type="number" class=" form-control" name="rl_input"  th:value="${list.density}"  ></td>
+					  <td><input class="deleteId btn btn-danger" style="width:100%;" type="button"  value="x Row" >
+					  <input  type="hidden" class="form-control" name="sa_imphiddenid" th:value="${list.id}" id="deleteInput">
+					  </td>
+							</tr>
+                                    <tr class="newRow">
+                                <th><input  type="number"   name="rl_input" class="nextLine form-control"   ></th>
+								<td ><input type="number"   name="rl_input" class="nextLine form-control"  ></td>
+								<td ><input type="number"  id="testId"  name="rl_input" class="nextLine form-control"  ></td>
+								<td ><input type="number"   name="rl_input" class="nextLine form-control"  ></td>
+								<td><input type="number"    name="rl_input" class="nextLine form-control"  ></td>
+								<td ><input type="number"   name="rl_input" class="nextLine form-control"></td>
+								<td ><input type="number"   name="rl_input" class="nextLine form-control"></td>
+								<td ><input type="number"    name="rl_input" class="nextLine form-control"></td>
+								<td ><input type="number"  name="rl_input" class="nextLine form-control"></td>
+								<td ><input type="number"   name="rl_input"  id="poRa" class="nextLine form-control"></td>
+								<td ><input type="number"   name="rl_input" class="nextLine form-control"></td>
+								<td style="display: none;"><input type="hidden"  th:value="5" name="rl_input" class="nextLine form-control"></td>
+								<td class="stressA"><input type="number"  class="nextLine form-control" name="rl_input"    ></td>
+								<td class="stressA"><input type="number" class="nextLine form-control" name="rl_input"     ></td>
+
+                                 <td><input id="sa_impaddfieldbt" class="btn btn-success" style="width:100%;" type="button" value="+ Row" ></td>
+                                    </tr>
+							</tbody>
+							
+                        </table>
+			<!-- 	<center>
+                        <input type="button" value="Save"   style="width: auto;" class="btn btn-info" id="fgfg" > <h4 id="rightSignID" style="display : none;"> &#10004;</h4>
+                        
+                      
+                        </center>   --> 
+			</div></div>
+			</form>
+			<br>
+        </div>

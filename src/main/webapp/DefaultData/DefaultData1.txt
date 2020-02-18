@@ -1,0 +1,7 @@
+wellbore Radius (rw)=0.0
+Drainage Radius (re)=0.0
+Perferation Length (lperf)=0.0
+Angle Phasing=0.0
+Kh/kv=0.0
+SPF=0.0
+Spacing b/w perf (h)=0.0

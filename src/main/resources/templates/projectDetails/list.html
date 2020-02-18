@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<meta name="layout" content="main">
+<title>FracAdvance: Projects</title>
+<script>
+$(document).ready(function(){
+	$("#searchProject").keyup(function(){
+		URL="/searchbyname";
+		$.ajax({
+			url:URL,
+			type:'POST',
+			data:{name:$(this).val()},
+			success:function(res){
+				var row="";
+				$("#example2 tbody").empty();
+				if(res.length>0){
+				var i;
+					for(i=0;i<res.length;i++){
+						row+=('<tr><td><a href=\"/showlist/'+res[i].id+'\">'+res[i].projectName+'</a></td>');
+						row+=('<td>'+res[i].wellName+'</td>');
+						row+=('<td>'+res[i].companyName+'</td>');
+						row+=('<td>'+res[i].user+'</td>');
+						row+=('<td>'+res[i].dateCreated+'</td>');
+						row+=('<td class=\"text-left\" style=\"width: 1%;\"><button id=\"delete\"><a href=\"/deleteproject/'+res[i].id+'\" class=\"fa fa-fw fa-trash\"></a></td></tr>');
+					}
+			}
+			else{
+				row+=('<tr colspan=\"5\"><td>No Data Available</td></tr>');
+			}
+				$("#example2 tbody").append(row);
+			}
+		});
+	});
+});
+</script>
+<style>
+.fa-trash:hover
+{color:red;
+
+}
+
+#delete {
+	background: none;
+	border: none;
+	outline: none;
+	transition: all 0.2s linear;
+	font-size: 18px;
+}
+
+html * {
+	font-family: 'Calibri';
+}
+
+#delete:hover{
+	font-size: 18.5px;
+	color: red;
+}
+
+.errspan {
+	float: right;
+	margin-right: 6px;
+	margin-top: -25px;
+	position: relative;
+	z-index: 2;
+}
+
+#searchProject:focus+.errspan{
+	color: #0369F7;
+}
+</style>
+</head>
+<body class="hold-transition skin-black sidebar-mini">
+	<div layout:fragment="content">
+		<!-- #IMPORTANT. Refer to this layout in every page you want to use the theme -->
+		<div class="content-wrapper" style="background-color: white;">
+			<section class="content-header">
+				<h1>
+					Project <small>All Projects</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i>Projects</a></li>
+					<li class="active">All</li>
+				</ol>
+			</section>
+			<section class="content">
+
+				<div class="row">
+
+					<!-- right col (We are only adding the ID to make the widgets sortable)-->
+					<section class="col-lg-12 ">
+
+						<div class="box box-info">
+							<div class="row box-header">
+								<div class="col-md-9">
+									<h3 class="box-title">All Projects</h3>
+								</div>
+								<div class="col-md-3">
+									<input type="text" class="form-control" id="searchProject"
+										placeholder="Search By Project Name" /> <span
+										class="fa fa-search errspan"></span>
+								</div>
+							</div>
+							<!-- /.box-header -->
+							<div id="projectTableBody" class="box-body">
+								<table id="example2" class="table table-hover">
+									<thead>
+										<tr>
+											<th>Project Name</th>
+											<th>Field Name</th>
+											<th>Company Name</th>
+											<th>User Name</th>
+											<th>Date Created</th>
+											<td style="width: 1%;"></td>
+										</tr>
+									</thead>
+									<tbody id="projectTableBody">
+										<tr th:if="${list.empty}">
+											<td colspan="5">No Data Available</td>
+										</tr>
+										<tr th:each="list : ${list}">
+											<td><a th:href="@{'/showlist/'+${list.Id}}"
+												th:value="${list.Id}" th:text="${list.projectName}"></a></td>
+											<td th:text="${list.wellName}"></td>
+											<td th:text="${list.companyName}"></td>
+											<td th:text="${list.user}"></td>
+											<td th:text="${list.dateCreated}"></td>
+											<td class="text-left" style="width: 1%;">
+												<button id="delete">
+													<a  th:href="@{'/deleteproject/'+${list.Id}}"
+														class=" fa fa-trash"></a>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+
+					</section>
+					<!-- right col -->
+				</div>
+				<!-- /.row (main row) -->
+			</section>
+
+		</div>
+	</div>
+</body>
+</html>

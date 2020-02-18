@@ -1,0 +1,93 @@
+<script th:inline="javascript">
+$("#updateBt").click(function(){
+	var pid=$("#pid").val();
+	$.ajax({
+		url:"/update",
+		data:{pid:pid},
+		success:function(res){
+			$("#loadtable").html(res);
+		    $("#exampleModal").show();
+		}
+	});
+});
+
+$("#03").click(function(){
+	
+	var id=$("#pid").val();
+	url="/importPage";
+	$.ajax({
+		url:url,
+		data:{pid:id},
+		success:function(res){
+			$("#loadtable").html(res);
+          	$("#exampleModal").show();
+		}
+	});
+});
+
+</script>
+<style>
+.table
+{
+ 
+width: 500px;
+height:auto;
+border-color:black;
+border-width:2px;
+box-shadow: 10px 10px grey;
+margin-left: 200px;
+}
+</style>
+
+<div class="btn-group-horizontal">
+						<button type="button" id="03" class="fa fa-arrow-left" aria-hidden="true" style="width:auto; border:none;">
+						</button>
+					
+					</div>
+
+
+<div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+ <li class="list-group-item">
+<div class="row form-group">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+    <label >Pumping Time (Min)</label>
+    </div>
+    <div class="col-md-3">
+   <input    class="form-control"  min=0 step="any" name="pumptime" th:value=${list[0].pumptime} placeholder="Enter Pumping Time" readonly>
+    <input id="pid" name="pid" type="hidden" th:value=${hiddenId}><br>
+    
+    </div>
+    </div>
+<div class="row"  >
+		
+          
+            <div class="col-md-1" ></div>
+            <div class="col-md-10" >
+            <table  class="table table-hover table-bordered ">
+                            <thead  class="bg-gray">
+							<tr   th:if="${session.unitType=='Field'}">
+							<th style="text-align: center">Pressure (psi)</th>
+							<th style="text-align: center">Shut In Time (Min)</th>
+						</tr>
+						<tr   th:if="${session.unitType=='Metric'}">
+							<th style="text-align: center">Pressure (pa)</th>
+							<th style="text-align: center">Shut In Time (Min)</th>
+						</tr>
+                            </thead>
+                             <tbody >
+                             <tr th:each="list : ${list}"  >
+                                            <td th:text="${list.pressure}" style="text-align:center"></td>
+                                            <td th:text="${list.time}" style="text-align:center"></td>
+                               </tr>
+                             </tbody>
+                        </table>
+                        
+            </div>
+            </div>
+               <center>
+            <input type="submit" id="updateBt" value="Edit" class="btn btn-primary" style="width:auto;"></input>
+            </center></li>
+</div>
+</div>

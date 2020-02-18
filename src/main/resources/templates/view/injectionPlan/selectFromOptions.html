@@ -1,0 +1,114 @@
+<script th:inline="javascript">
+	
+
+	$("#0").click(
+			function() {
+				
+				var var2 = $("#pid").val();
+			
+				$.ajax({
+					url : '/injectionPlan/showinjection',
+					data : {
+						pid : var2
+					},
+					success : function(res) {
+						$("#loadtable").html(res);
+						$("#exampleModal").show();
+					
+					}
+				});
+
+			});
+	$("#1").click(
+			function() {
+			
+				var var2 = $("#pid").val();
+			
+				$.ajax({
+					url : '/showOptimumFracture',
+					data : {
+						pid : var2
+					},
+					success : function(res) {
+						$("#loadtable").html(res);
+						$("#exampleModal").show();
+						
+					}
+				});
+
+			});
+	
+	
+	
+	
+	var selectedtype= $("#injectionplanTwoOptionID").val();
+	if(selectedtype=="TreatmentAnalysis")
+	{
+		 
+		$("#0")
+		   .removeClass('btn-default')
+		   .addClass('btn-success');
+		$("#1")
+		   .removeClass('btn-success')
+		   .addClass('btn-default');
+		
+	}
+	
+	if(selectedtype=="TreatmentDesign")
+		{
+		 
+		$("#1")
+		   .removeClass('btn-default')
+		   .addClass('btn-success');
+		$("#0")
+		   .removeClass('btn-success')
+		   .addClass('btn-default');
+		}
+	
+ 
+</script>
+
+
+	<input id="pid" name="pid" type="hidden" th:value=${pid}>
+	<input id="injectionplanTwoOptionID" name="injectionplanTwoOptionName" type="hidden" th:value=${injectionplanTwoOption}>
+
+
+
+
+
+
+
+
+<!-- <div class="col-md-7" id="radiodiv">
+					<Label>Select Well Type:</Label>
+					<div class="btn-group-horizontal">
+						<button type="button" class="btn btn-primary" style="width:auto">
+							<label for="0">Oil Well&nbsp;&nbsp;</label><input id="0" type="radio"
+								name="aq" checked="checked" value="Oil Well" />
+						</button>
+						<button type="button" class="btn btn-primary" style="width:auto">
+							<label for="1">Gas Well&nbsp;&nbsp;</label><input type="radio" name="aq"
+								id="1" checked="checked" value="Gas Well" />
+						</button>
+					</div>
+				</div>
+ -->
+
+<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-7" id="radiodiv">
+					<Label>Select  Type:</Label>
+					<div class="btn-group-horizontal">
+						<button type="button" id="0" class="btn btn-default" style="width:auto">
+							<label for="0">Treatment Analysis&nbsp;&nbsp;</label><input id="07" type="radio"
+								name="aq" checked="checked" value="TreatmentAnalysis" hidden />
+
+						</button>
+						<button type="button" id="1"  class="btn btn-default" style="width:auto">
+							<label for="1">Treatment Design&nbsp;&nbsp;</label><input type="radio" name="aq"
+								id="17" checked="checked" value="TreatmentDesign" hidden />
+
+						</button>
+					</div>
+				</div>
+			</div>

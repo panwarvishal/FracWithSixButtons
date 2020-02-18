@@ -1,0 +1,821 @@
+<script th:inline="javascript">
+
+var unit= $('#unitType').val;
+
+
+	reportMiniFracGraph([[${minifrac}]]);
+	//reportStressGraph([[${stress}]]);
+	//reportDeclineGraph([[${decline}]]);
+	reportMainFracGraph([[${mainfrac}]]);
+	reportOtherwidthGraph([[${otheroutput}]]);
+	reportOtherlengthGraph([[${otheroutput}]]);
+	reportOtherconductivityGraph([[${otheroutput}]]);
+	reportOtherpnetGraph([[${otheroutput}]],unit);
+	reportSlurryScheduleGraph([[${slurrySchedule}]],unit);
+	
+	var chart1,chart2,chart3,chart4,chart5,chart6,chart7,chart8, chart20;
+	
+ function reportMiniFracGraph(dataprovider){
+	 var a = new Array();   
+	 var b = new Array();   
+	for (i = 0; i < dataprovider.length; i++){
+		a.push([parseFloat(dataprovider[i].gtd), parseFloat(dataprovider[i].dpdG)]);
+		b.push([parseFloat(dataprovider[i].gtd), parseFloat(dataprovider[i].gdpdG)]);
+    }
+	
+	chart1=Highcharts.chart('minifracdiv', {
+	    chart: {
+	        type: 'line',
+	    },
+	    title: {
+	        text: 'Mini Frac'
+	    },
+	   
+	    xAxis: {
+	    min:0,
+	    	title: {
+	            text: 'Time(Min)'
+	        }
+	    },
+	    yAxis: { min:0,
+	        title: {
+	            text: 'Pressure(psi)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    series: [{
+	    	name:'G Vs Derivative',
+	    	data: a
+	    },{
+	    	name:'G Vs G*Derivative',
+	    	data:b
+	    }],
+
+	    exporting: {
+	        enabled: false // hide button
+	    },
+	    credits:{
+	    	enabled:false
+	    }
+	});
+	
+} 
+ 
+ 
+ function reportSlurryScheduleGraph(dataprovider){
+	 var a = new Array();   
+	 var b = new Array();   
+	for (i = 0; i < dataprovider.length; i++){
+		a.push([parseFloat(dataprovider[i].time), parseFloat(dataprovider[i].proppMixSch)]);
+		//b.push([parseFloat(dataprovider[i].gtd), parseFloat(dataprovider[i].gdpdG)]);
+    }
+	
+	chart1=Highcharts.chart('slurrySchedulediv', {
+	    chart: {
+	        type: 'line',
+	    },
+	    title: {
+	        text: 'slurry Schedule'
+	    },
+	   
+	    xAxis: {
+	    min:0,
+	    	title: {
+	            text: 'Time(Min)'
+	        }
+	    },
+	    yAxis: { min:0,
+	        title: {
+	            text: 'Slurryconcentration(Feet)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    series: [{
+	    	name:'Time Vs Slurry Concentration',
+	    	data: a
+	    }, ],
+
+	    exporting: {
+	        enabled: false // hide button
+	    },
+	    credits:{
+	    	enabled:false
+	    }
+	});
+	
+} 
+ 
+ 
+ 
+ 
+ 
+ 
+ function reportStressGraph(dataprovider){
+		  var a = new Array();   
+		 var b = new Array();   
+		for (i = 0; i < dataprovider.length; i++){
+			a.push([parseFloat(dataprovider[i].depth), parseFloat(dataprovider[i].breakdown)]);
+			b.push([parseFloat(dataprovider[i].depth), parseFloat(dataprovider[i].horizontal)]);
+	    }
+		
+		chart2=Highcharts.chart('stressdiv', {
+		    chart: {
+		        type: 'line'
+		    },
+		    title: {
+		        text: 'Stress Analysis'
+		    },
+		   
+		    xAxis: { min:0,
+		    	title: {
+		            text: 'Pressure(Mpa)'
+		        }
+		    },
+		    yAxis: { min:0,
+		        title: {
+		        	reversed: true,
+		            text: 'Depth(m)'
+		        }
+		    },
+		    plotOptions: {
+		        line: {
+		            dataLabels: {
+		                enabled: false
+		            },
+		            enableMouseTracking: true
+		        }
+		    },
+		    series: [{
+		    	name:'Horizontal Pressure',
+		    	data: a
+		    },{
+		    	name:'Breakdown Pressure',
+		    	data: b
+		    }],
+
+		    exporting: {
+		        enabled: false // hide button
+		    },
+		    credits:{
+		    	enabled:false
+		    }
+		});
+	} 
+ 
+ function reportDeclineGraph(dataprovider){
+	var a = new Array();   
+	for (i = 0; i < dataprovider.length; i++){
+		a.push([parseFloat(dataprovider[i].time), parseFloat(dataprovider[i].rate)]);
+    }
+	
+	chart3=Highcharts.chart('declinediv', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Decline Curve'
+	    },
+	   
+	    xAxis: { min:0,
+	    	title: {
+	            text: 'Time(Year)'
+	        }
+	    },
+	    yAxis: { min:0,
+	        title: {
+	            text: 'Q(STB/Day)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    series: [{
+	    	name:'to be update',
+	    	data: a
+	    }],
+
+	    exporting: {
+	        enabled: false // hide button
+	    },
+	    credits:{
+	    	enabled:false
+	    }
+	});
+} 
+
+ function reportMainFracGraph(dataprovider){
+	 var a = new Array();  
+	 for (i = 0; i < dataprovider.length; i++){
+		 a.push([parseFloat(dataprovider[i].x), parseFloat(dataprovider[i].y)]);
+    }
+	 
+	chart4=Highcharts.chart('mainfracdiv', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Optimum Fracture Length'
+	    },
+	   
+	    xAxis: {
+	    	title: {
+	            text: 'Length(m)'
+	        }
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'Width(m)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    series: [{
+	    	name:'dont know',
+	    	data: a,
+	    }],
+
+	    exporting: {
+	        enabled: false // hide button
+	    },
+	    credits:{
+	    	enabled:false
+	    },
+	    
+	  
+	});
+	
+} 
+
+ function reportOtherwidthGraph(dataprovider){
+	 var a = new Array();   
+	for (i = 0; i < dataprovider.length; i++){
+		a.push([parseFloat(dataprovider[i].time), parseFloat(dataprovider[i].w)]);
+    }
+	chart5=Highcharts.chart('otherwidthdiv', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Width'
+	    },
+	   
+	    xAxis: { min:0,
+	    	title: {
+	            text: 'Time(Min)'
+	        }
+	    },
+	    yAxis: { min:0,
+	        title: {
+	            text: 'Width(m)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    series: [{
+	    	name:'dont know',
+	    	data: a
+	    }],
+
+	    exporting: {
+	        enabled: false // hide button
+	    },
+	    credits:{
+	    	enabled:false
+	    }
+	});
+	
+} 
+ function reportOtherlengthGraph(dataprovider){
+	 var a = new Array();   
+	for (i = 0; i < dataprovider.length; i++){
+		a.push([parseFloat(dataprovider[i].time), parseFloat(dataprovider[i].lt)]);
+    }
+	chart6=Highcharts.chart('otherlengthdiv', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Half Length'
+	    },
+	   
+	    xAxis: { min:0,
+	    	title: {
+	            text: 'Time(Min)'
+	        }
+	    },
+	    yAxis: { min:0,
+	        title: {
+	            text: 'Half Length(ft)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    series: [{
+	    	name:'dont know',
+	    	data: a
+	    }],
+
+	    exporting: {
+	        enabled: false // hide button
+	    },
+	    credits:{
+	    	enabled:false
+	    }
+	});
+	
+}
+ function reportOtherconductivityGraph(dataprovider){
+	 var a = new Array();   
+	for (i = 0; i < dataprovider.length; i++){
+		a.push([parseFloat(dataprovider[i].time), parseFloat(dataprovider[i].conductivity)]);
+    }
+	chart7=Highcharts.chart('otherconductivitydiv', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Conductivity'
+	    },
+	   
+	    xAxis: { min:0,
+	    	title: {
+	            text: 'Time(Min)'
+	        }
+	    },
+	    yAxis: { min:0,
+	        title: {
+	            text: 'Conductivity(md-ft)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    legend:[{
+	    	enabled:false
+	    }],
+	    series: [{
+	    	name:'',
+	    	data: a
+	    }],
+
+	    exporting: {
+	        enabled: false // hide button
+	    },
+	    credits:{
+	    	enabled:false
+	    }
+	}
+	);
+	
+}
+ function reportOtherpnetGraph(dataprovider,unt){
+	 var a = new Array();   
+	for (i = 0; i < dataprovider.length; i++){
+		a.push([parseFloat(dataprovider[i].time), parseFloat(dataprovider[i].pnet)]);
+    }
+	chart8=Highcharts.chart('otherpnetdiv', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Net Pressure'
+	    },
+	   
+	    xAxis: { min:0,
+	    	title: {
+	            text: 'Time(Min)' //+unit
+	        }
+	    },
+	    yAxis: { min:0,
+	        title: {
+	            text: 'Width(m)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    series: [{
+	    	name:'dont know',
+	    	data: a
+	    }],
+
+	    exporting: {
+	        enabled: false // hide button
+	    },
+	    credits:{
+	    	enabled:true
+	    }
+	});
+	
+}
+ 
+  Highcharts.getSVG = function (charts) {
+	    var svgbefore=[],svgArr = [],svgafter=[],
+	        top = 0,
+	        width = 0;
+	    svgbefore.push('<foreignObject><table>'+
+	    		'<tr>'+[[${map1.get("Project Name")}]]+'</tr>'+
+	    		'<tr>'+[[${map1.get("Well Name")}]]+'</tr>'+
+	    		'<tr>'+[[${map1.get("Company Name")}]]+'</tr>'+
+	    		'<tr>'+[[${map1.get("Date Created")}]]+'</tr>'+
+	    		'<th>Project Name</th>'+
+	    		'<th>Well Name</th>'+
+	    		'<th>Company Name</th>'+
+	    		'<th>Date Created</th>'+
+	    		'</table></foreignObject>');
+	    
+	    Highcharts.each(charts, function (chart, i) {
+	        var svg = chart.getSVG(),
+	            // Get width/height of SVG for export
+	            svgWidth = +svg.match(
+	                /^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/
+	            )[1],
+	            svgHeight = +svg.match(
+	                /^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/
+	            )[1];
+
+	        svg = svg.replace('<svg', '<g transform="translate(0,' + top + ')" ');
+	        svg = svg.replace('</svg>', '</g>');
+	        top += svgHeight;
+	        width = Math.max(width, svgWidth);
+			svgArr.push(svg);
+	    });
+	    return '<svg height="' + (top) + '" width="' + width +
+	        '" version="1.1" xmlns="http://www.w3.org/2000/svg">' +
+	        svgbefore.join('') + svgArr.join('') + '</svg>';
+	};
+	
+	
+	Highcharts.exportCharts = function (charts, options) {
+	    // Merge the options
+	    options = Highcharts.merge(Highcharts.getOptions().exporting, options);
+	    // Post to export server
+	    Highcharts.post(options.url, {
+	        filename: options.filename || [[${map1.get('Project Name')}]],
+	        type: options.type,
+	        width: options.width,
+	        svg: Highcharts.getSVG(charts)
+	    });
+	}; 
+	
+	 var doc = new jsPDF();
+	 var specialElementHandlers = {
+			    '#editor': function (element, renderer) {
+			        return true;
+			    }
+			};
+	
+	$('#reportDownBt').click(function () {
+	    Highcharts.exportCharts([chart1, chart2, chart3, chart4, chart5, chart6, chart7, chart8, chart20], {
+	        type: 'application/pdf'
+	    });
+	    doc.fromHTML($('#maindiv').html(), 10, 10, {
+	       
+	           // 'elementHandlers': specialElementHandlers,
+	           // left:10,
+	          //  top:10,
+	         //   bottom: 10,
+	          //  width: 50,
+	         //   height: 10,
+	           // autoSize:false,
+	            //printHeaders: true
+	    });
+	    doc.save('Report.pdf');
+	});
+	
+	function saveReport(e) {
+		
+		  var var20= document.body.innerHTML;
+	      var var21= document.getElementById(e).innerHTML;
+		  document.body.innerHTML= var21;
+		  window.print();
+		  document.body.innerHTML=var20;
+		}
+</script>
+
+<style>
+.graphDivClass{
+	width: 95%;
+	height: 460px;
+	font-weight: bold;
+	font-size: 150px;
+}
+#reportDownBt:hover{
+	background-color:#43AEF3;
+	color:black;
+	font-weight:bold;
+}
+
+</style>
+
+
+<style>
+<!--
+
+hr.style-six {
+	position: relative;
+	padding: 0;
+	border: none;
+	height: 1px;
+	background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0),
+		rgba(243, 156, 18, 1), rgba(0, 0, 0, 0));
+	background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0),
+		rgba(243, 156, 18, 1), rgba(0, 0, 0, 0));
+	background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0),
+		rgba(243, 156, 18, 1), rgba(0, 0, 0, 0));
+	background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0),
+		rgba(243, 156, 18, 1), rgba(0, 0, 0, 0));
+	color: #333;
+	text-align: center;
+}
+
+hr.style-six:after {
+	content: " ";
+	display: inline-block;
+	font-size: 1.5em;
+	padding: 10px 22px;
+	background: #fff url(image/cartoon_1.png) no-repeat scroll center;
+	height: 50px;
+}
+.tableRowClass
+{
+
+}
+
+/*   	.table tr:nth-child(even){
+		background: #d7f7f5;  
+		
+	} */
+	
+ 	.table {
+		 
+		
+		
+	}
+	
+.table
+{
+ 
+width: 900px;
+height:300px;
+border-color:black;
+border-width:10px;
+/* box-shadow: 10px 10px grey; */
+ border: 3px solid black;
+}
+
+.tableTHClass, .tableTHClass
+{
+
+}
+.heading
+{
+color: black; 
+background-image: radial-gradient(white, gray); 
+width: 300px;
+ 
+text-align: center;
+align: center;
+border: 3px solid black;
+ 
+
+}
+.img-logo {
+
+	position:  fixed;
+	left: 47.5%;
+	width: 50px;
+	height: 30px;
+	opacity: 0.9;
+}
+-->
+</style>
+
+
+<div class="row">
+<div class="col-md-10"></div>
+<div class="col-md-2">
+<div class="col-md-4">
+
+<button onclick="saveReport('test1')" class="btn btn-default" id="reportDownBt1" style="width:auto;display: inline-block;text-align: center;margin-top:7%;" ><i class="fa fa-download"></i> &nbsp;&nbsp;Download</button>
+									
+									
+</div>
+</div>
+</div>
+<div id="maindiv">
+<div class="row"
+	style="max-height: 480px; overflow-y: auto; overflow-x: hidden;">
+	<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4">
+<h3 class="heading" >REPORT</h3><hr>
+
+<!-- <input type="hidden" id="unitType"
+									th:value=${ProjectDetail.getUnitType()}> -->
+
+</div>
+</div>
+
+<br>
+<div class="row" id="test1">
+	<div class="row" >
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<table class="table table-bordered" style="height: 100px;">
+				<tr>
+					<th th:each="map : ${map1}" >[[${map.key}]]
+					</th>
+				</tr>
+				<tr>
+					<td th:each="map : ${map1}" th:text="${map.value}">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<br>
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+		<center><h4 class="heading" align="center" style="float: center;" >FRACTURE ANALYSIS OUTPUTS</h4></center>
+			<table class="table ">
+				<tr th:each="map : ${map2}">
+					<th th:text="${map.key}" style="width: 50%"></th>
+					<td th:text="${map.value}" style="text-align: left"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+		<center><h4 class="heading" >OPTIMUM DESIGN OUTPUTS</h4></center>
+			<table class="table">
+				<tr th:each="map : ${map3}">
+					<th th:text="${map.key}" style="width: 50%"></th>
+					<td th:text="${map.value}" style="text-align: left"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<br><center><h3 class="heading" >Graphs</h3></center>
+	<strong> 
+											 
+											 
+											<hr class="style-six" />
+											<img src="dist/img/petrolium-logo.png" class="img-logo"
+												alt="User Image">
+										 </strong>
+	<div class="row" >
+	<div class="col-md-1"></div>
+	<div class="graphDivClass col-md-10" id="minifracdiv"></div>
+	</div>
+<strong> 
+										 
+											<hr class="style-six" />
+											<img src="dist/img/petrolium-logo.png" class="img-logo"
+												alt="User Image">
+										 </strong>
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="graphDivClass col-md-10" id="slurrySchedulediv"></div>
+	</div>
+	<!-- <br>
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="graphDivClass col-md-10" id="stressdiv"></div>
+	</div>
+	<br>
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="graphDivClass col-md-10" id="declinediv"></div>
+	</div> -->
+		<hr class="style-six" />
+	<br>
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="graphDivClass col-md-10" id="mainfracdiv"></div>
+	</div>
+		<hr class="style-six" />
+	<br>
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="graphDivClass col-md-10" id="otherwidthdiv"></div>
+	</div>
+		<hr class="style-six" />
+	<br>
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="graphDivClass col-md-10" id="otherlengthdiv"></div>
+	</div>
+		<hr class="style-six" />
+	<br>
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="graphDivClass col-md-10" id="otherconductivitydiv"></div>
+	</div>
+		<hr class="style-six" />
+	<br>
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="graphDivClass col-md-10" id="otherpnetdiv"></div>
+	</div>
+		<hr class="style-six" />
+	<br>
+	<center><h3 class="heading" >Injection Plan</h3></center><br>
+	<div class="row" style="margin-right:1%;">
+	<div class="col-md-12" style="overflow-x: auto; overflow-y: auto;">
+	
+	<table id="ip_showexample" style="height: 100px;" class="table table-hover table-bordered" >
+							<tr>
+							<th nowrap="nowrap">&nbsp;&nbsp;&nbsp;Step&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<th nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fluid
+								Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+							<th nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stage
+								Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+							<th nowrap="nowrap">Rate(BPM)</th>
+							<th nowrap="nowrap">Clean Volume(BBL)</th>
+							<th nowrap="nowrap">Slurry Vol.(BBL)</th>
+							<th nowrap="nowrap">Cumulative Slurry Vol.(BBL)</th>
+							<th nowrap="nowrap">Begin Proppant Conc.(PPG)</th>
+							<th nowrap="nowrap">End Proppant Conc.(PPG)</th>
+							<th nowrap="nowrap">Stage Prop(LBS)</th>
+							<th nowrap="nowrap">Cumulative Prop(LBS)</th>
+							<th nowrap="nowrap">Step Time</th>
+							<th nowrap="nowrap">Elapsed Time</th>
+							</tr>
+                            <tr th:each="list:${list}" th:if="${list}!=null">
+							<td th:text="${list.step}"></td>
+							<td th:text="${list.fluidtype}"></td>
+							<td th:text="${list.stagetype}"></td>
+							<td th:text="${list.rate}"></td>
+							<td th:text="${list.cleanvol}"></td>
+							<td th:text="${list.slurryvol}"></td>
+							<td th:text="${list.cumslurry}"></td>
+							<td th:text="${list.begprop}"></td>
+							<td th:text="${list.endprop}"></td>
+							<td th:text="${list.stageprop}"></td>
+							<td th:text="${list.cumprop}"></td>
+							<td th:text="${list.steptime}"></td>
+							<td th:text="${list.cumStepTime}"></td>
+						</tr>
+                        </table>
+                        
+	
+	</div>
+	</div>
+	</div>
+</div>
+</div>
+<div id="editor"></div>

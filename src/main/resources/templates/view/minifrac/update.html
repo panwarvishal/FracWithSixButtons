@@ -1,0 +1,164 @@
+<script th:inline="javascript">
+
+$("#SaveBt").click(function(){
+	
+	url="/save";
+	$.ajax({
+		url:url,
+		dataType : 'json',
+		data: $("#mainform").serialize(),
+		success:function(data){
+			console.log(data);
+			$("#loadtable").html("data");
+		    $("#exampleModal").show();
+		}
+	});
+});
+
+/* $("#delk").click(function(eve){
+	eve.preventDefault();
+	alert("Here");
+	var id=$(this).val();
+	var pid=$("#pid").val();
+	url="/delete";
+	$.ajax({
+	url:url,
+	data:{id:id,pid:pid},
+	success:function(data){
+		console.log(data);
+		$("#loadtable").html(data);
+	    $("#exampleModal").show();
+	}
+	});
+}); */
+
+$(".deleteId").click(function(){
+	 var id =$(this).closest('td').find('input[name=sa_imphiddenid]').val();
+	//var id =$("#deleteInput").val();
+	var pid=$("#pid").val();
+	
+	url="/delete";
+	$.ajax({
+		url:url,
+		data:{pid:pid,id:id},
+		success:function(res){
+			$("#loadtable").html(res);
+			$("#exampleModal").show();
+		}
+	});
+});
+
+$("#03").click(function(){
+	
+	var id=$("#pid").val();
+	url="/reverseToShowList";
+	$.ajax({
+		url:url,
+		data:{pid:id},
+		success:function(res){
+			$("#loadtable").html(res);
+          	$("#exampleModal").show();
+		}
+	});
+});
+</script>
+<style>
+/* tbody {
+    display:block;
+    max-height:300px;
+    overflow:auto;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+} */
+
+
+.tableRowClass
+{
+
+}
+
+	.table tr:nth-child(even){
+		background: #d7f7f5;
+	}
+	
+.table
+{
+ 
+width: 500px;
+height:auto;
+border-color:black;
+border-width:2px;
+box-shadow: 10px 10px grey;
+margin-left: 200px;
+}
+
+
+.delbt:hover
+{color:red;}
+
+#danno {
+	background: none;
+	border: none;
+	outline: none;
+	transition: all 0.2s linear;
+	font-size: 18px;
+}
+
+</style>
+<div class="btn-group-horizontal">
+						<button type="button" id="03" class="fa fa-arrow-left" aria-hidden="true" style="width:auto; border:none;">
+						</button>
+					
+					</div>
+<div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+
+ <li class="list-group-item">
+
+<form id="mainform">
+<div class="row form-group">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+    <label >Pumping Time (Min)</label>
+    </div>
+    <div class="col-md-3">
+   <input  id="ptime" class="form-control" type="text" min=0 step="any" name="pumptime" th:value=${list[0].pumptime} placeholder="Enter Pumping Time" required>
+    <input id="pid" name="pid" type="hidden" th:value=${hiddenId}><br>
+    
+    </div>
+    </div>
+<div class="row" id="table1">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+            <table id="example2" class="table table-hover table-bordered" >
+                            <thead  class="bg-gray">
+							<tr>
+                            		<th class="text-center">Pressure (psi)</th>
+                            		<th  class="text-center">Shut In Time (Min)</th>
+                            		 
+                            </tr>
+                            </thead>
+                             <tbody >
+                             <tr th:each="list : ${list}"  >
+<td><input type="text" name="pressure" th:value="${list.pressure}" class="press form-control text-center" style="border:none"></td>
+<td><input type="text" name="time" th:value="${list.time}" class="time form-control text-center" style="border:none">
+<td><input class="deleteId text-center btn btn-danger float-right" style="width:5px; " align="center" type="button" th:value="X"   >
+					  <input  type="hidden" class="form-control fa-trash" name="sa_imphiddenid" th:value="${list.id}" id="deleteInput">
+					  </td>
+           </tr>
+ </tbody>
+                        </table>
+            </div>
+            </div>
+          
+            
+</form>
+</li>
+</div>
+  <center>
+            <input type="submit" id="SaveBt" value="Save" class="btn btn-primary" style="width:auto;"></input>
+            </center>
+</div>

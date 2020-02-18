@@ -1,0 +1,129 @@
+<script>
+$("#rl_showEditbt").click(function(){
+	url="reservoirLithology/saveupdate";
+	$.ajax({
+		url:url,
+		data:$("#rl_mainform").serialize(),
+		success:function(res){
+			$("#loadtable").html(res);
+			$("#exampleModal").show();
+		}
+	});
+});
+
+var x=   $("#stressanalysisID").val();
+if(x=="yes" )
+	{
+	 $( "#cid" ).prop( "checked", true );
+	 $('.stressA').show();	
+	 $("#as").show();	
+	 $("#as1").show();	
+	 $("#as2").show();	
+	 
+
+	}
+else{
+	 $( "#cid" ).prop( "checked", false );
+	 $('.stressA').hide();		 
+
+}
+</script>
+ <input id="stressanalysisID" type="hidden" name="said" th:value="${stressAnalysis}"/>
+<section class="content">
+<li class="list-group-item">
+
+<div class="row">
+ 
+<div class="col-md-12" style="overflow-x: auto; overflow-y: hidden;">
+<form id="rl_mainform">
+<input type="hidden" id="rl_editpid" th:name="pid" th:value="${pid}">
+<table id="example2" style="position: relative; border: 1px;  background-image: radial-gradient(white, gray);" class="table table-hover table-bordered" >
+                              <thead  th:if="${session.unitType=='Metric'}">        	<tr style=" background-image: radial-gradient(white, gray); text-align: center; " height="8" >
+								   <th  >Zone &nbsp;&nbsp; </th>
+									<th  > From MD<br>(ft)</th>
+							    	<th    > To MD<br>(ft)</th>
+							    	<th    >TVD<br>(ft)</th>
+								    <th     >Reservoir<br>Pressure</th>
+							     	<th >Permeability<br>(m2)</th>
+								    <th >Porosity</th>
+									<th>Young's<br>Modulus </th>
+									<th    id="as" >Poisson Ratio</th>
+									<th    >Leakoff Coef<br>(m/(min)1/2)</th>
+									<th  id="as21"    >Spurt loss Coefficient</th>
+									
+									<th   id="as1" class="stressA" style="	  display:none; ">Pore Pressure</th>
+									<th  id="as2" class="stressA" style="	  display:none;">Density</th>
+									
+									
+							</tr>	</thead>
+						
+			  <!-- This is for the user th:if="${buttonValue=='userDiv'}" -->		
+						
+<!-- 					<thead  if=[[${session.unitType}]]=="Field">
+ -->					<thead  th:if="${session.unitType=='Field'}">
+					
+					<tr style=" background-image: radial-gradient(white, gray); text-align: center; " height="8" >
+								   <th  >Zone &nbsp;&nbsp; </th>
+									<th  > From MD<br>(ft)</th>
+							    	<th    > To MD<br>(ft)</th>
+							    	<th    >TVD<br>(ft)</th>
+								    <th     >Reservoir<br>Pressure</th>
+							     	<th >Permeability<br>(m2)</th>
+								    <th >Porosity</th>
+									<th>Young's<br>Modulus </th>
+									<th    id="as" >Poisson Ratio</th>
+									<th    >Leakoff Coef<br>(m/(min)1/2)</th>
+									<th  id="as21"    >Spurt loss Coefficient</th>
+									
+									<th   id="as1" class="stressA" style="	  display:none; ">Pore Pressure</th>
+									<th  id="as2" class="stressA" style="	  display:none;">Density</th>
+									
+									
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="list:${list}">
+								<th style="text-align:center;" th:text=" ${list.zone} " name="rl_input" ></th>
+									<td title="MD(ft)"><input type="number" min="0" max=""
+									 class="form-control" id="tvd1" name="rl_input" th:value="${list.fromMd}" style="border:none;"></td>
+								<td title="Layer Thickness(ft)"><input type="number" min="0" max=""
+									class="form-control" id="tvd2" name="rl_input" th:value="${list.toMd}" style="border:none;"></td>
+								<td title="TVD(ft)"><input type="number" min="0" max=""
+									class="form-control" id="tvd3" name="rl_input" th:value="${list.tvd}" style="border:none;"></td>
+								<td title="Rock	Type"><input type="number" min="0" max=""
+									class="form-control" id="tvd4" name="rl_input" th:value="${list.reservoirPressure}" style="border:none;"></td>
+								<td title="Permiability(md)"><input type="number" min="0" max=""
+									class="form-control" id="tvd6" name="rl_input" th:value="${list.perm}" style="border:none;"></td>
+								<td title="Porosity"><input type="number" min="0" max=""
+									class="form-control" id="tvd7" name="rl_input" th:value="${list.poro}" style="border:none;"></td>
+									<td title="Youngs Modulus"><input type="number" min="0" max=""
+									class="form-control" id="tvd9" name="rl_input" th:value="${list.youngs}" style="border:none;"></td>
+						 
+						 
+						 
+						 
+						 <td title="Youngs Modulus"><input type="number" min="0" max=""
+									class="form-control" id="tvd10" name="rl_input" th:value="${list.poisonRatio}" style="border:none;"></td>
+						<td title="Leakoff Coefficient(ft/min^5)"><input type="number" min="0" max=""
+									class="form-control" id="tvd8" name="rl_input" th:value="${list.leakoff}" style="border:none;"></td>
+							
+						<td title="Youngs Modulus"><input type="number" min="0" max=""
+									class="form-control" id="tvd1as2" name="rl_input" th:value="${list.spurtLossCoefficient}" style="border:none;"></td>
+						 <td title="Youngs Modulus" class="stressA"><input type="number" min="0" max=""
+									class="form-control" id="tvd11" name="rl_input" th:value="${list.porePressure}" style="border:none;"></td>
+						 <td title="Youngs Modulus" class="stressA"><input type="number" min="0" max=""
+									class="form-control" id="tvd12" name="rl_input" th:value="${list.density}" style="border:none;"></td>
+						  
+						 
+						 
+							</tbody>
+                        </table>
+                       </form>
+</div>
+</div>
+<br><center>
+	<input id="rl_showEditbt" class="btn btn-primary" type="submit"
+		value="Save" style="width:10%"/>
+</center>
+</li>
+</section>

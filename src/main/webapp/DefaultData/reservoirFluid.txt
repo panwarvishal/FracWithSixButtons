@@ -1,0 +1,11 @@
+/Reservoir properties
+Tensile Strength=0.0
+Tensile Stress=0.0
+Biot's Constant=0.0
+Pay Height=30.48
+Fracture Gross Height=91.46
+/Optimum Fracture Design Input
+Fluid injection rate (bpm)=0.0
+Final proppant concentration (ppg)=0.0
+Fracture height	(ft)=0.0
+Fracture half-length (ft)=0.0

@@ -1,0 +1,142 @@
+<script>
+$("#rl_showEditbt").click(function(){
+	url="reservoirLithology/showedit";
+	$.ajax({
+		url:url,
+		data:{pid:$("#rl_showpid").val()},
+		success:function(res){
+			$("#loadtable").html(res);
+			$("#exampleModal").show();
+		}
+	});
+});
+
+var x=   $("#stressanalysisID").val();
+if(x=="yes" )
+	{
+	 $( "#cid" ).prop( "checked", true );
+	 $('.stressA').show();	
+	 $("#as").show();	
+	 $("#as1").show();	
+	 $("#as2").show();	
+	 
+
+	}
+else{
+	 $( "#cid" ).prop( "checked", false );
+	 $('.stressA').hide();		 
+
+}
+
+$("#05").click(function(){
+	
+	var id=$("#rl_showpid").val();
+	alert("aaaaaaa"+id);
+	url="/reservoirLithology/showLithology";
+	$.ajax({
+		url:url,
+		data:{pid:id},
+		success:function(res){
+			$("#loadtable").html(res);
+          	$("#exampleModal").show();
+		}
+	});
+});
+</script>
+
+
+<!-- <div class="btn-group-horizontal">
+						<button type="button" id="05" class="fa fa-arrow-left" aria-hidden="true" style="width:auto; border:none;">
+						</button>
+					
+					</div>
+ --> 
+  <input id="stressanalysisID" type="hidden" name="said" th:value="${stressAnalysis}"/>
+ 
+<li class="list-group-item">
+<input type="hidden" id="rl_showpid" th:value="${pid}">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10" style="overflow-x: auto; overflow-y: hidden;">
+ </br>
+
+		
+			</div>
+			<br>
+<table id="example2" class="table table-hover table-bordered" style=" background-image: radial-gradient(white, gray);" >
+                           <thead  th:if="${session.unitType=='Metric'}">
+        	<tr style=" background-image: radial-gradient(white, gray); text-align: center; " height="8" >
+								   <th  >Zone &nbsp;&nbsp; </th>
+									<th  > From MD<br>(ft)</th>
+							    	<th    > To MD<br>(ft)</th>
+							    	<th    >TVD<br>(ft)</th>
+								    <th     >Reservoir<br>Pressure</th>
+							     	<th >Permeability<br>(m2)</th>
+								    <th >Porosity</th>
+									<th>Young's<br>Modulus </th>
+									<th    id="as" >Poisson Ratio</th>
+									<th    >Leakoff Coef<br>(m/(min)1/2)</th>
+									<th  id="as21"    >Spurt loss Coefficient</th>
+									
+									<th   id="as1" class="stressA" style="	  display:none; ">Pore Pressure</th>
+									<th  id="as2" class="stressA" style="	  display:none;">Density</th>
+									
+									
+							</tr>
+						</thead>
+						
+			  <!-- This is for the user th:if="${buttonValue=='userDiv'}" -->		
+						
+<!-- 					<thead  if=[[${session.unitType}]]=="Field">
+ -->					<thead  th:if="${session.unitType=='Field'}">
+					
+					<tr style=" background-image: radial-gradient(white, gray); text-align: center; " height="8" >
+								   <th  >Zone &nbsp;&nbsp; </th>
+									<th  > From MD<br>(ft)</th>
+							    	<th    > To MD<br>(ft)</th>
+							    	<th    >TVD<br>(ft)</th>
+								    <th     >Reservoir<br>Pressure</th>
+							     	<th >Permeability<br>(m2)</th>
+								    <th >Porosity</th>
+									<th>Young's<br>Modulus </th>
+									<th    id="as" >Poisson Ratio</th>
+									<th    >Leakoff Coef<br>(m/(min)1/2)</th>
+									<th  id="as21"    >Spurt loss Coefficient</th>
+									
+									<th   id="as1" class="stressA" style="	  display:none; ">Pore Pressure</th>
+									<th  id="as2" class="stressA" style="	  display:none;">Density</th>
+									
+									
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="list:${list}">
+								<th style="text-align:center;" th:text="${list.zone}">-Zone</th>
+								<td th:text="${list.fromMd}"></td>
+								<td th:text="${list.toMd}"></td>
+								<td th:text="${list.tvd}"></td>
+								<td th:text="${list.reservoirPressure}"></td>
+								<td th:text="${list.perm}"></td>
+								<td th:text="${list.poro}"></td>
+								<td th:text="${list.youngs}"></td>
+								<td th:text="${list.poisonRatio}"></td>
+								<td th:text="${list.leakoff}"></td>
+								<td th:text="${list.spurtLossCoefficient}"></td>
+								<td class="stressA" th:text="${list.porePressure}"></td>
+								<td class="stressA"  th:text="${list.density}"></td>
+								
+							</tr>
+							</tbody>
+                        </table>                        
+                        
+                                    
+</div>
+</div>
+<br><center>
+	<input id="rl_showEditbt" class="btn btn-primary" type="submit"
+		value="Edit" style="width:10%"/>
+</center>
+</li>
+
+
+

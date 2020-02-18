@@ -1,0 +1,290 @@
+    <script type="text/javascript">
+
+    $( "#button" ).click(function() {
+    	
+        $( "#fill" ).slideToggle( "slow" );
+        $( "#form" ).slideToggle( "slow" );
+        var val = $(this).val();
+        if(val=="Enter Manually"){
+        document.getElementById('button').value = "Import Well Log";
+        }
+        else{
+        document.getElementById('button').value = "Enter Manually";
+        }
+        });
+   ////////////////////////////////////////////////// 
+            $("#rl_impstages").keyup(function(){
+    	    $("#as9").show();
+    	    url="reservoirLithology/rows";
+    	    $.ajax({
+    		url:url,                     
+    		data:{no:$(this).val(),pid:$("#rl_imppid").val(),},    
+    	    success:function(res){
+    		$("#loadtable").html(res);
+			$("#exampleModal").show();
+			$("#rl_impsavebt").show();
+			$("#fill").show();
+          	$("#form").hide();
+    	}
+    	});
+    });
+    
+ ///////////  /////////////////////////////////////
+     $("#fiveValue").click(function(){
+    	    setTimeout(() => {
+    	    	$("#rightSignID").show();  }, 50);
+    	    setTimeout(() => {
+    	    	$("#rightSignID").fadeOut();}, 500);
+     	url="reservoirLithology/controller5value";
+     	var empty2=0;
+    	var bottomholePressure1= $(bottomholePressure).val();
+		var reservoirTemperature1= $(reservoirTemperature).val();
+		var FractureGrossHeight1= $(FractureGrossHeightid).val();
+		var tensileStress1= $(tensileStress).val();
+		var tectonicStress1= $(tectonicStress).val();
+		var BiotConstant1= $(BiotConstant).val();
+     	if ($(this).val() == ''  ) {
+     		empty2 = empty2 + 1;
+			$(this).attr("placeholder", "Required");
+			$(this).css({'border':'1px solid #d9534f'});				
+		}
+	
+     if(empty2==0){	
+     $.ajax({
+     		url:url,                     
+     		data:{ pid:$("#rl_imppid").val(),FractureGrossHeight1:FractureGrossHeight1,reservoirTemperature1:reservoirTemperature1,BiotConstant1:BiotConstant1,tensileStress1:tensileStress1,tectonicStress1:tectonicStress1,bottomholePressure1:bottomholePressure1,},    
+     	success:function(res){
+     		$("#loadtable").html(res);
+ 			$("#exampleModal").show();		
+     	}
+     	});
+     	}
+     });
+ /////////////////////////////
+    $("#rl_impsavebt").click(function(){
+    	url="reservoirLithology/savelithology";
+    	$.ajax({
+    		url:url,
+    		data:$("#rl_mainform").serialize(),
+    		success:function(res){
+    			$("#loadtable").html(res);
+    			$("#exampleModal").show();
+    		}
+    	});
+    });
+    
+    
+    
+    $("#cid").click(function(){
+		// $('.3Buttons').css(visibility: visible);
+		// $("#678").css(display : normal);
+		$("#as1").show();
+		$("#as2").show();
+			url="reservoirLithology/stressAController";
+	    	$.ajax({
+	    		url:url,
+	    		data:{pid:$("#rl_imppid").val(),}, 
+	    		success:function(res){
+	    			$("#loadtable").html(res);
+	    			$("#exampleModal").show();
+	    		}
+	    	});
+    });
+    
+    ////////////////////
+    var x=   $("#stressanalysisID").val();
+    if(x=="yes" )
+    	{
+    	 $( "#cid" ).prop( "checked", true );
+		 $('.stressA').show();	
+		 $("#as").show();	
+		 $("#as1").show();	
+		 $("#as2").show();	
+		 
+
+    	}
+    else{
+    	 $( "#cid" ).prop( "checked", false );
+		 $('.stressA').hide();		 
+
+	}
+   
+    
+    </script>
+  
+     
+     
+     <style>
+     
+#newfont
+{
+  font-family: "Verdana", Times, serif;
+
+}
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #2196F3;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.pull-right:hover  {
+   color: black;
+   border-color: black;
+   background-image: radial-gradient(white, gray);
+   float: right;
+}
+
+.btn-primary:hover  {
+   color: black;
+   border-color: black;
+   background-image: radial-gradient(white, gray);
+}
+/* When the checkbox is checked, add a green background */
+.container input:checked ~ .checkmark {
+  background-color: #66ff33;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+table, th, td {
+  border: 10px solid white;
+}
+
+
+  #rightSignID 
+{
+
+font-size: 22px;
+color:green;
+}
+ 
+  #rightSignID, #updateDivId
+{
+    display:inline;
+    padding: 50;
+}
+ #id5ValueForm
+ {
+ padding-left: 35px;
+ }
+</style>
+<body class="body1" >
+	<form id="id5ValueForm" >		 
+ <table  id="smalltable" >
+  <tr style=" padding-left: 35px;">
+     <th><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reservoir Temperature &nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input   class="form-control" min="0" type="text" id="reservoirTemperature"  name="name5values" th:value="${temp}" />
+ </th>
+ 
+ <th><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fracture Gross Height  &nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input   class="form-control" min="0" type="text" id="FractureGrossHeightid"  name="name5values" th:value="${FractureGrossHeight}" />
+ </th>
+ 
+   <!--  <th><label style=" padding-left: 35px;" >Bottomhole Pressure&nbsp;&nbsp;&nbsp;</label></th>
+  -->   <th> <input  class="form-control" min="0" type="hidden" id="bottomholePressure" name="name5values" th:value="${pressure}"/>
+ </th>
+
+  </tr>
+    <tr style="display:none" class="stressA"  >
+    <th style=" padding-left: 35px;"><label>Biot's Constant&nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input  class="form-control" min="0" type="text" id="BiotConstant" name="name5values" th:value="${biot}"/>
+ </th>
+
+    <th><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tensile Stress
+ &nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input  class="form-control" min="0" type="text" id="tensileStress" name="name5values" th:value="${tensile1}"/>
+ </th>
+   
+     <th><label>&nbsp;&nbsp;Tectonic Stress
+&nbsp;&nbsp;&nbsp;</label></th>
+    <th> <input  class="form-control" min="0" type="text" id="tectonicStress" name="name5values" th:value="${tectonic1}"/>
+ </th>
+  </tr> 
+   <tr>
+   
+ 
+  <label class="container"> Select Stress Analysis
+  <input id="cid" type="checkbox"  Style="bgcolor:blue;" >
+  <span class="checkmark"></span>
+  
+</label>
+						</tr>
+</table>	
+</form> 
+<div>
+            <div class="row" id="updateDivId" style="width:auto; margin-right: 35px;">
+             <div>  
+                   <span style='font-size:100px;'></span>
+                        <input type="submit"  value="Save & Next" class="btn btn-info pull-right"    id="fiveValue" style="width:auto;  "/>
+	<!-- <h3 id="rightSignID" style="display : none;"> &#10004;</h3>  -->
+	</div> </div>
+	 
+        <div class="row" id="form">
+            <div class="col-lg-8 col-xs-6">
+              
+            
+                    
+   
+                              
+                    <input id="rl_imppid" type="hidden" name="pid" th:value="${pid}"/>
+                    <input id="stressanalysisID" type="hidden" name="said" th:value="${stressAnalysis}"/>
+            
+            </div> 
+          
+            </div>
+        </div>
+  
+        
+        </div>
+        </body>
